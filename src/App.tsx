@@ -12,9 +12,15 @@ export type Run = {
   pickedGear: string;
 };
 
+export type GearList = {
+  id: number;
+  name: string;
+  kilometers: number;
+}
+
 export default function App() {
   const [runCollection, setRunCollection] = useState<Run[]>([]);
-  const [gearListState, setGearListState] = useState(gearList); // 1. Put the entire gearList in state
+  const [gearListState, setGearListState] = useState<GearList[]>(gearList); // 1. Put the entire gearList in state
   const [gearWarning, setGearWarning] = useState<boolean>(false);
   const [wornOutGear, setWornOutGear] = useState("");
   const [gearInput, setGearInput] = useState("");
@@ -37,6 +43,12 @@ export default function App() {
       alert("Please enter a shoe name."); 
     }
   };
+
+  //delete gear
+
+
+
+  // avoid duplicated gear when creating
 
   return (
     <div className="App">
