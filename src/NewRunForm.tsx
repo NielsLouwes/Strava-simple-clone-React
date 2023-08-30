@@ -1,6 +1,6 @@
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from "formik";
 import { FormLabel, FormButton } from "./App.styled";
-import { Run } from "./App";
+import { GearList, Run } from "./App";
 import { AppUtils } from "./App.utils";
 import styled from "styled-components";
 
@@ -37,7 +37,7 @@ export const NewRunForm = ({
   gearListState,
   setGearListState
 }: NewRunFormProps) => {
-  const validateDistance = (value) => {
+  const validateDistance = (value: any) => {
     let error;
     const reg = /^[0-9]+$/;
 
@@ -51,7 +51,7 @@ export const NewRunForm = ({
     return error;
   };
 
-  const validateTitle = (value) => {
+  const validateTitle = (value: any) => {
     let error;
     const reg = /^[a-zA-Z]+$/;
 
@@ -109,7 +109,7 @@ export const NewRunForm = ({
 
         <FormLabel htmlFor="gear">Gear used</FormLabel>
         <Field as="select" name="pickedGear">
-          {gearListState.map((item) => (
+          {gearListState.map((item: GearList) => (
             <option key={item.name} value={item.name}>
               {item.name}
             </option>

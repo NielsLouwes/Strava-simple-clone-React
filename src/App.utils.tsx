@@ -1,3 +1,4 @@
+import { GearList } from "./App";
 
 type Run = {
   title: string;
@@ -5,15 +6,11 @@ type Run = {
   pickedGear: string;
 };
 
-type gearList = {
-    id: number;
-    name: string;
-    kilometers: number;
-}[]
 
-const checkWornOutShoes = (gearListState: {id: number, name: string, kilometers: number}, setGearWarning: React.Dispatch<React.SetStateAction<boolean>>, setWornOutGear: React.Dispatch<React.SetStateAction<string>>) => {
+
+const checkWornOutShoes = (gearListState: GearList[], setGearWarning: React.Dispatch<React.SetStateAction<boolean>>, setWornOutGear: React.Dispatch<React.SetStateAction<string>>) => {
   const wornOutItem = gearListState.find((gear) => gear.kilometers > 749);
-  console.log("worn out item:", wornOutItem);
+  
   if (wornOutItem) {
     setGearWarning(true);
     setWornOutGear(wornOutItem.name);
@@ -23,7 +20,7 @@ const checkWornOutShoes = (gearListState: {id: number, name: string, kilometers:
   }
 };
 
-const updateGearKilometers = (newRun: Run, gearListState, setGearListState) => {
+const updateGearKilometers = (newRun: Run, gearListState: GearList[], setGearListState:  React.Dispatch<React.SetStateAction<GearList[]>>) => {
   // 2. function to match kilometers from run to our gear item
   const updatedGearList = gearListState.map((gear) => {
     if (gear.name === newRun.pickedGear) {

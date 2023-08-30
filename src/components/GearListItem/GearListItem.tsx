@@ -1,8 +1,13 @@
 // in Future it will allow for deleting
 // only show delete button if hovering over
+import { GearList } from "../../App";
 import { DeleteButton, Container } from "./GearListItem.styled";
 
-export const GearListItem = ({ item }) => {
+type GearListItemProps = {
+  item: GearList;
+}
+
+export const GearListItem = ({ item }: GearListItemProps) => {
   return (
     <Container>
       <p key={item.id}>
