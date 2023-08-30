@@ -25,12 +25,17 @@ export default function App() {
 
   // creating a new run gear object, adding that to our array , spread array , newgear object
   const addNewGear = () => {
-    const newGear = {
-      id: setGearListState.length + 1,
-      name: gearInput,
-      kilometers: 0
-    };
-    setGearListState([...gearListState, newGear]);
+    if (gearInput.length > 0) {
+      const newGear = {
+        id: gearListState.length + 1, 
+        name: gearInput,
+        kilometers: 0
+      };
+      setGearListState([...gearListState, newGear]);
+      setGearInput(""); 
+    } else {
+      alert("Please enter a shoe name."); 
+    }
   };
 
   return (
