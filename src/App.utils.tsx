@@ -1,4 +1,17 @@
-const checkWornOutShoes = (gearListState, setGearWarning, setWornOutGear) => {
+
+type Run = {
+  title: string;
+  distance: number;
+  pickedGear: string;
+};
+
+type gearList = {
+    id: number;
+    name: string;
+    kilometers: number;
+}[]
+
+const checkWornOutShoes = (gearListState: {id: number, name: string, kilometers: number}, setGearWarning: React.Dispatch<React.SetStateAction<boolean>>, setWornOutGear: React.Dispatch<React.SetStateAction<string>>) => {
   const wornOutItem = gearListState.find((gear) => gear.kilometers > 749);
   console.log("worn out item:", wornOutItem);
   if (wornOutItem) {
