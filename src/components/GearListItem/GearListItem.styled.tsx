@@ -4,11 +4,23 @@ export const DeleteButton = styled.button`
   border: none;
   color: #fc5201;
   background: none;
+  color: white;
+
+  
 `;
 
 export const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  /* border: 1px solid red; */
   gap: 25px;
+  padding: 5px 10px;
+
+  &:hover {
+    background: #F7F7FA;
+  }
+
+  &:hover ${DeleteButton} {
+    color: #fc5201;
+    cursor: pointer;
+  }
 `;

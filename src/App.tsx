@@ -44,11 +44,14 @@ export default function App() {
     }
   };
 
-  //delete gear
+  //delete gear 1. Create a function, pass it to GearListItem, call is there
+
+  const deleteGear = (id: number) => {
+    const deleted = gearListState.filter((gear) => gear.id !== id);
+    setGearListState(deleted);
+  }
 
 
-
-  // avoid duplicated gear when creating
 
   return (
     <div className="App">
@@ -72,7 +75,7 @@ export default function App() {
       </Container>
       <div>
         {gearListState &&
-          gearListState.map((item) => <GearListItem item={item} />)}
+          gearListState.map((item) => <GearListItem item={item} deleteGear={deleteGear} />)}
       </div>
       {gearWarning && (
         <WarningMessage>
