@@ -30,37 +30,6 @@ export default function App() {
     AppUtils.checkWornOutShoes(gearListState, setGearWarning, setWornOutGear);
   }, [gearListState]);
 
-  // creating a new run gear object, adding that to our array , spread array , newgear object
-  const addNewGear = () => {
-    const checkDuplicates = gearListState.some(
-      (gear) => gear.name.toLowerCase() === gearInput.toLocaleLowerCase()
-    );
-    if (checkDuplicates) {
-      setDuplicateError(true);
-      return;
-    }
-    if (gearInput.length > 0) {
-      const newGear = {
-        id: gearListState.length + 1,
-        name: gearInput,
-        kilometers: 0,
-      };
-      setGearListState([...gearListState, newGear]);
-      setGearInput("");
-      setDuplicateError(false);
-    } else {
-      alert("Please enter a shoe name.");
-    }
-  };
-
-  //delete gear
-  const deleteGear = (id: number) => {
-    const newGearList = gearListState.filter((item) => {
-      return item.id != id;
-    });
-    setGearListState(newGearList);
-  };
-
   return (
     <div className="App">
       <Container>
@@ -69,7 +38,7 @@ export default function App() {
           action="submit"
           onSubmit={(event) => {
             event.preventDefault();
-            addNewGear();
+            AppUtils.addNewGear(gearListState, gearInput, setDuplicateError, setGearListState, setGearInput);
           }}
         >
           <input
@@ -89,7 +58,7 @@ export default function App() {
       <div>
         {gearListState &&
           gearListState.map((item) => (
-            <GearListItem key={item.id} item={item} deleteGear={deleteGear} />
+            <GearListItem key={item.id} item={item} deleteGear={() => AppUtils.deleteGear(item.id, gearListState, setGearListState)} />
           ))}
       </div>
       {gearWarning && (
