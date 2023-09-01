@@ -1,0 +1,1 @@
+1. Move the util functions and related state from app.tsx to a useCustomHook.
