@@ -1,7 +1,7 @@
 import "./styles.css";
 import { gearList } from "./data";
 import { useEffect, useState } from "react";
-import { RunContainer, WarningMessage, Container, Button } from "./App.styled";
+import { RunContainer, WarningMessage, Container, Button, DuplicateError } from "./App.styled";
 import { NewRunForm } from "./NewRunForm";
 import { AppUtils } from "./App.utils";
 import { GearListItem } from "./components/GearListItem/GearListItem";
@@ -16,7 +16,7 @@ export type GearList = {
   id: number;
   name: string;
   kilometers: number;
-}
+};
 
 export default function App() {
   const [runCollection, setRunCollection] = useState<Run[]>([]);
@@ -24,6 +24,7 @@ export default function App() {
   const [gearWarning, setGearWarning] = useState<boolean>(false);
   const [wornOutGear, setWornOutGear] = useState("");
   const [gearInput, setGearInput] = useState("");
+  const [duplicateError, setDuplicateError] = useState(false);
 
   useEffect(() => {
     AppUtils.checkWornOutShoes(gearListState, setGearWarning, setWornOutGear);
@@ -31,34 +32,34 @@ export default function App() {
 
   // creating a new run gear object, adding that to our array , spread array , newgear object
   const addNewGear = () => {
-    const checkDuplicates = gearListState.some(gear => gear.name.toLowerCase() === gearInput.toLocaleLowerCase());
+    const checkDuplicates = gearListState.some(
+      (gear) => gear.name.toLowerCase() === gearInput.toLocaleLowerCase()
+    );
     if (checkDuplicates) {
-      setGearInput(""); 
+      setDuplicateError(true);
       return;
     }
     if (gearInput.length > 0) {
       const newGear = {
-        id: gearListState.length + 1, 
+        id: gearListState.length + 1,
         name: gearInput,
-        kilometers: 0
+        kilometers: 0,
       };
       setGearListState([...gearListState, newGear]);
-      setGearInput(""); 
+      setGearInput("");
+      setDuplicateError(false);
     } else {
-      alert("Please enter a shoe name."); 
+      alert("Please enter a shoe name.");
     }
   };
-  
+
   //delete gear
   const deleteGear = (id: number) => {
     const newGearList = gearListState.filter((item) => {
       return item.id != id;
-    })
-    setGearListState(newGearList)
-  }
-
-
-  // avoid duplicated gear when creating
+    });
+    setGearListState(newGearList);
+  };
 
   return (
     <div className="App">
@@ -80,9 +81,16 @@ export default function App() {
           <Button>+</Button>
         </form>
       </Container>
+      {duplicateError ? (
+        <DuplicateError>Shoe name already exists. Try a different name.</DuplicateError>
+      ) : (
+        ""
+      )}
       <div>
         {gearListState &&
-          gearListState.map((item) => <GearListItem key={item.id} item={item} deleteGear={deleteGear} />)}
+          gearListState.map((item) => (
+            <GearListItem key={item.id} item={item} deleteGear={deleteGear} />
+          ))}
       </div>
       {gearWarning && (
         <WarningMessage>

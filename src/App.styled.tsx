@@ -33,3 +33,8 @@ export const Button = styled.button`
   color: #fc5201;
   margin-left: 10px;
 `;
+
+export const DuplicateError = styled.p`
+  color: red;
+  font-size: 10px;
+`
