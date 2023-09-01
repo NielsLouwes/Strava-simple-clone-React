@@ -45,7 +45,12 @@ export default function App() {
   };
 
   //delete gear
-
+  const deleteGear = (id: number) => {
+    const newGearList = gearListState.filter((item) => {
+      return item.id != id;
+    })
+    setGearListState(newGearList)
+  }
 
 
   // avoid duplicated gear when creating
@@ -72,7 +77,7 @@ export default function App() {
       </Container>
       <div>
         {gearListState &&
-          gearListState.map((item) => <GearListItem item={item} />)}
+          gearListState.map((item) => <GearListItem item={item} deleteGear={deleteGear} />)}
       </div>
       {gearWarning && (
         <WarningMessage>

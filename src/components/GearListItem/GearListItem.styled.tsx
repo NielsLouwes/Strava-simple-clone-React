@@ -9,6 +9,5 @@ export const DeleteButton = styled.button`
 export const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  /* border: 1px solid red; */
   gap: 25px;
 `;
