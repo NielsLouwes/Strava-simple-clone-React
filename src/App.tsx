@@ -31,6 +31,11 @@ export default function App() {
 
   // creating a new run gear object, adding that to our array , spread array , newgear object
   const addNewGear = () => {
+    const checkDuplicates = gearListState.some(gear => gear.name.toLowerCase() === gearInput.toLocaleLowerCase());
+    if (checkDuplicates) {
+      setGearInput(""); 
+      return;
+    }
     if (gearInput.length > 0) {
       const newGear = {
         id: gearListState.length + 1, 
@@ -43,7 +48,7 @@ export default function App() {
       alert("Please enter a shoe name."); 
     }
   };
-
+  
   //delete gear
   const deleteGear = (id: number) => {
     const newGearList = gearListState.filter((item) => {
@@ -77,7 +82,7 @@ export default function App() {
       </Container>
       <div>
         {gearListState &&
-          gearListState.map((item) => <GearListItem item={item} deleteGear={deleteGear} />)}
+          gearListState.map((item) => <GearListItem key={item.id} item={item} deleteGear={deleteGear} />)}
       </div>
       {gearWarning && (
         <WarningMessage>
