@@ -1,5 +1,5 @@
 import "./styles.css";
-import { gearList } from "./data";
+import { sortedGearList } from "./data";
 import { useEffect, useState } from "react";
 import { RunContainer, WarningMessage, Container, Button, DuplicateError } from "./App.styled";
 import { NewRunForm } from "./NewRunForm";
@@ -20,7 +20,7 @@ export type GearList = {
 
 export default function App() {
   const [runCollection, setRunCollection] = useState<Run[]>([]);
-  const [gearListState, setGearListState] = useState<GearList[]>(gearList); // 1. Put the entire gearList in state
+  const [gearListState, setGearListState] = useState<GearList[]>(sortedGearList); // 1. Put the entire gearList in state
   const [gearWarning, setGearWarning] = useState<boolean>(false);
   const [wornOutGear, setWornOutGear] = useState("");
   const [gearInput, setGearInput] = useState("");

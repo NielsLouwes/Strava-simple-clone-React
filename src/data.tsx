@@ -3,3 +3,7 @@ export const gearList = [
   { id: 2, name: "Nike Pegasus", kilometers: 550 },
   { id: 3, name: "Asics Novablast", kilometers: 400 }
 ];
+
+export const sortedGearList = gearList.sort((a,b) => b.kilometers - a.kilometers);
+
+console.log("sorted", sortedGearList)

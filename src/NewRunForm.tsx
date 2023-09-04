@@ -45,7 +45,7 @@ export const NewRunForm = ({
       error = "Required!";
     } else if (!reg.test(value)) {
       error = "Only numbers are allowed";
-    } else if (parseInt(value, 10) > 239) {
+    } else if (parseInt(value, 10) > 400) {
       error = "Too great a distance, try again.";
     }
     return error;
