@@ -5,6 +5,7 @@ import { RunContainer, WarningMessage, Container, Button, DuplicateError } from 
 import { NewRunForm } from "./NewRunForm";
 import { AppUtils } from "./App.utils";
 import { GearListItem } from "./components/GearListItem/GearListItem";
+import { AppBar } from "./components/AppBar/AppBar";
 
 export type Run = {
   title: string;
@@ -32,6 +33,7 @@ export default function App() {
 
   return (
     <div className="App">
+      <AppBar />
       <Container>
         <h2>Gear list</h2>
         <form
