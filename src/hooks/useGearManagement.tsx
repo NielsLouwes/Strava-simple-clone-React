@@ -11,7 +11,6 @@ export const useGearManagement = () => {
 
   const checkWornOutShoes = () => {
     const wornOutItem = gearListState.find((gear) => gear.kilometers > 749);
-     console.log("Checking worn out items:", wornOutItem); // Debug line
 
     if (wornOutItem) {
       setGearWarning(true);
@@ -22,9 +21,7 @@ export const useGearManagement = () => {
     }
   };
 
-  const updateGearKilometers = (
-    newRun: Run,
-  ) => {
+  const updateGearKilometers = (newRun: Run) => {
     const updatedGearList = gearListState.map((gear) => {
       if (gear.name === newRun.pickedGear) {
         return {
@@ -34,7 +31,7 @@ export const useGearManagement = () => {
       }
       return gear;
     });
-    console.log("Updated gearList", updatedGearList); // Debug line
+
     setGearListState(updatedGearList);
     checkWornOutShoes();
   };
@@ -68,7 +65,7 @@ export const useGearManagement = () => {
     setGearListState(newGearList);
   };
 
-   useEffect(() => {
+  useEffect(() => {
     checkWornOutShoes();
   }, [gearListState]);
 

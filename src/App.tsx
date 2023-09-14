@@ -1,5 +1,5 @@
 import "./styles.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   RunContainer,
   WarningMessage,
@@ -10,6 +10,7 @@ import {
 import { NewRunForm } from "./NewRunForm";
 import { GearListItem } from "./components/GearListItem/GearListItem";
 import { useGearManagement } from "./hooks/useGearManagement";
+import { GearListForm } from "./components/GearListForm/GearListForm";
 
 export type Run = {
   title: string;
@@ -43,21 +44,7 @@ export default function App() {
     <div className="App">
       <Container>
         <h2>Gear list</h2>
-        <form
-          action="submit"
-          onSubmit={(event) => {
-            event.preventDefault();
-            addNewGear();
-          }}
-        >
-          <input
-            type="text"
-            placeholder="name of shoe"
-            value={gearInput}
-            onChange={(event) => setGearInput(event.target.value)}
-          />
-          <Button>+</Button>
-        </form>
+        <GearListForm addNewGear={addNewGear} gearInput={gearInput} setGearInput={setGearInput}/>
       </Container>
       {duplicateError ? (
         <DuplicateError>
