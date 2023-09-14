@@ -27,22 +27,17 @@ export default function App() {
   const [runCollection, setRunCollection] = useState<Run[]>([]);
 
   const {
-    checkWornOutShoes,
     addNewGear,
     deleteGear,
-    updateGearKilometers,
     gearWarning,
     gearListState,
     wornOutGear,
     gearInput,
     duplicateError,
     setGearInput,
-    setGearListState
+    setGearListState,
+    updateGearKilometers
   } = useGearManagement();
-
-  useEffect(() => {
-    checkWornOutShoes();
-  }, [gearListState]);
 
   return (
     <div className="App">
@@ -93,6 +88,7 @@ export default function App() {
         runCollection={runCollection}
         gearListState={gearListState}
         setGearListState={setGearListState}
+        updateGearKilometers={updateGearKilometers}
       />
       <RunContainer>
         <h2>Runs</h2>

@@ -68,6 +68,10 @@ export const useGearManagement = () => {
     setGearListState(newGearList);
   };
 
+   useEffect(() => {
+    checkWornOutShoes();
+  }, [gearListState]);
+
   return {
     checkWornOutShoes,
     addNewGear,

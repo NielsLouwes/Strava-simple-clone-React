@@ -1,7 +1,7 @@
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from "formik";
 import { FormLabel, FormButton } from "./App.styled";
 import { GearList, Run } from "./App";
-import { AppUtils } from "./App.utils";
+// import { AppUtils } from "./App.utils";
 import styled from "styled-components";
 import { useGearManagement } from "./hooks/useGearManagement";
 
@@ -22,16 +22,16 @@ type NewRunFormProps = {
   runCollection: Run[];
   gearListState: any;
   setGearListState: any;
+  updateGearKilometers: any;
 };
 
 export const NewRunForm = ({
   setRunCollection,
   runCollection,
   gearListState,
-  setGearListState,
+  updateGearKilometers
 }: NewRunFormProps) => {
-  // const { gearListState, setGearListState } = useGearManagement();
-
+  
   const validateDistance = (value: any) => {
     let error;
     const reg = /^[0-9]+$/;
@@ -71,10 +71,8 @@ export const NewRunForm = ({
         const { setSubmitting, resetForm } = formikHelpers;
         setTimeout(() => {
           setRunCollection([...runCollection, values]);
-          AppUtils.updateGearKilometers(
+          updateGearKilometers(
             values,
-            gearListState,
-            setGearListState
           );
           setSubmitting(false);
           resetForm({
