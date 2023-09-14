@@ -44,7 +44,7 @@ export default function App() {
     <div className="App">
       <Container>
         <h2>Gear list</h2>
-        <GearListForm addNewGear={addNewGear} gearInput={gearInput} setGearInput={setGearInput}/>
+        <GearListForm addNewGear={addNewGear} gearInput={gearInput} setGearInput={setGearInput} duplicateError={duplicateError}/>
       </Container>
       {duplicateError ? (
         <DuplicateError>

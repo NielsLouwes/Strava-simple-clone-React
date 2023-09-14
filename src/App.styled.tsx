@@ -27,11 +27,14 @@ export const Container = styled.div`
 
 export const Button = styled.button`
   height: 30px;
+  width: 30px;
   border-radius: 50%;
   background: white;
   border: 2px solid #fc5201;
   color: #fc5201;
   margin-left: 10px;
+  padding: 0;
+  cursor: pointer;
 `;
 
 export const DuplicateError = styled.p`
