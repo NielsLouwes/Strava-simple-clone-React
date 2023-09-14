@@ -37,7 +37,7 @@ const updateGearKilometers = (
     }
     return gear;
   });
-  setGearListState(updatedGearList); // 3. Update the gearListState
+  setGearListState(updatedGearList); 
 };
 
 const addNewGear = (

@@ -1,10 +1,15 @@
 import "./styles.css";
-import { gearList } from "./data";
 import { useEffect, useState } from "react";
-import { RunContainer, WarningMessage, Container, Button, DuplicateError } from "./App.styled";
+import {
+  RunContainer,
+  WarningMessage,
+  Container,
+  Button,
+  DuplicateError,
+} from "./App.styled";
 import { NewRunForm } from "./NewRunForm";
-import { AppUtils } from "./App.utils";
 import { GearListItem } from "./components/GearListItem/GearListItem";
+import { useGearManagement } from "./hooks/useGearManagement";
 
 export type Run = {
   title: string;
@@ -20,14 +25,23 @@ export type GearList = {
 
 export default function App() {
   const [runCollection, setRunCollection] = useState<Run[]>([]);
-  const [gearListState, setGearListState] = useState<GearList[]>(gearList); // 1. Put the entire gearList in state
-  const [gearWarning, setGearWarning] = useState<boolean>(false);
-  const [wornOutGear, setWornOutGear] = useState("");
-  const [gearInput, setGearInput] = useState("");
-  const [duplicateError, setDuplicateError] = useState(false);
+
+  const {
+    checkWornOutShoes,
+    addNewGear,
+    deleteGear,
+    updateGearKilometers,
+    gearWarning,
+    gearListState,
+    wornOutGear,
+    gearInput,
+    duplicateError,
+    setGearInput,
+    setGearListState
+  } = useGearManagement();
 
   useEffect(() => {
-    AppUtils.checkWornOutShoes(gearListState, setGearWarning, setWornOutGear);
+    checkWornOutShoes();
   }, [gearListState]);
 
   return (
@@ -38,7 +52,7 @@ export default function App() {
           action="submit"
           onSubmit={(event) => {
             event.preventDefault();
-            AppUtils.addNewGear(gearListState, gearInput, setDuplicateError, setGearListState, setGearInput);
+            addNewGear();
           }}
         >
           <input
@@ -51,14 +65,20 @@ export default function App() {
         </form>
       </Container>
       {duplicateError ? (
-        <DuplicateError>Shoe name already exists. Try a different name.</DuplicateError>
+        <DuplicateError>
+          Shoe name already exists. Try a different name.
+        </DuplicateError>
       ) : (
         ""
       )}
       <div>
         {gearListState &&
           gearListState.map((item) => (
-            <GearListItem key={item.id} item={item} deleteGear={() => AppUtils.deleteGear(item.id, gearListState, setGearListState)} />
+            <GearListItem
+              key={item.id}
+              item={item}
+              deleteGear={() => deleteGear(item.id)}
+            />
           ))}
       </div>
       {gearWarning && (

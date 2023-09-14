@@ -3,6 +3,7 @@ import { FormLabel, FormButton } from "./App.styled";
 import { GearList, Run } from "./App";
 import { AppUtils } from "./App.utils";
 import styled from "styled-components";
+import { useGearManagement } from "./hooks/useGearManagement";
 
 interface Values {
   title: string;
@@ -19,24 +20,18 @@ const ErrorText = styled.div`
 type NewRunFormProps = {
   setRunCollection: React.Dispatch<React.SetStateAction<[] | Run[]>>;
   runCollection: Run[];
-  setGearListState: React.Dispatch<
-    React.SetStateAction<
-      {
-        id: number;
-        name: string;
-        kilometers: number;
-      }[]
-    >
-  >;
   gearListState: any;
+  setGearListState: any;
 };
 
 export const NewRunForm = ({
   setRunCollection,
   runCollection,
   gearListState,
-  setGearListState
+  setGearListState,
 }: NewRunFormProps) => {
+  // const { gearListState, setGearListState } = useGearManagement();
+
   const validateDistance = (value: any) => {
     let error;
     const reg = /^[0-9]+$/;
@@ -45,7 +40,7 @@ export const NewRunForm = ({
       error = "Required!";
     } else if (!reg.test(value)) {
       error = "Only numbers are allowed";
-    } else if (parseInt(value, 10) > 239) {
+    } else if (parseInt(value, 10) > 400) {
       error = "Too great a distance, try again.";
     }
     return error;
@@ -70,7 +65,7 @@ export const NewRunForm = ({
       initialValues={{
         title: "",
         distance: 0,
-        pickedGear: "Asics Trebuco Max"
+        pickedGear: "Asics Trebuco Max",
       }}
       onSubmit={(values: Values, formikHelpers: FormikHelpers<Values>) => {
         const { setSubmitting, resetForm } = formikHelpers;
@@ -83,7 +78,7 @@ export const NewRunForm = ({
           );
           setSubmitting(false);
           resetForm({
-            values: { title: "", distance: 0, pickedGear: "Asics Trebuco Max" }
+            values: { title: "", distance: 0, pickedGear: "Asics Trebuco Max" },
           });
         }, 500);
       }}
